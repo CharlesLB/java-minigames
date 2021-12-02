@@ -16,7 +16,7 @@ public class Listener {
 
 	public static Square getSquare(boolean withValue) {
 		try {
-			Printer.getSquare();
+			Printer.getSquare(withValue);
 
 			String position = scanner.nextLine();
 

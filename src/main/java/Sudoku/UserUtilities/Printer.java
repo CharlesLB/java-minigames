@@ -26,12 +26,15 @@ public class Printer {
 		System.out.println("  [4]: Exit");
 	}
 
-	public static void getSquare() {
-		System.out.println("Insert the next square:");
+	public static void getSquare(boolean withValue) {
+		if (withValue) {
+			System.out.println("Insert the next square:");
+			return;
+		}
+		System.out.println("Insert a position square '(x,y)':");
 	}
 
 	public static void getPosition() {
-		System.out.println("Insert a position '(x,y)':");
 	}
 
 	public static void exitMessage() {
