@@ -1,15 +1,54 @@
 package Sudoku.UserUtilities;
 
+import Sudoku.Domain.Square;
+
 public class Printer {
-	public static void printGetInitialBoardTypeText(){
-		System.out.println("Choose initial board type: \n");
-		System.out.println("  [0]: random board \n");
-		System.out.println("  [1]: manual builder board \n");
+	public static void getInitialBoardTypeText() {
+		System.out.println("Choose initial board type:");
+		System.out.println("  [0]: random board");
+		System.out.println("  [1]: manual builder board");
 	}
 
-	public static void printBoardTypeError(){
+	public static void randomBoardBuilder() {
+		System.out.println("How many squares do you want filled in?");
+	}
+
+	public static void startGameMessage() {
+		System.out.println("Let's Play Sudoku!");
+	}
+
+	public static void menuGame() {
+		System.out.println("Choose action:");
+		System.out.println("  [0]: Play move");
+		System.out.println("  [1]: Remove move");
+		System.out.println("  [2]: Verify Game");
+		System.out.println("  [3]: Take a hint");
+		System.out.println("  [4]: Exit");
+	}
+
+	public static void getSquare() {
+		System.out.println("Insert the next square:");
+	}
+
+	public static void getPosition() {
+		System.out.println("Insert a position '(x,y)':");
+	}
+
+	public static void exitMessage() {
+		System.out.println("Good Bye!");
+	}
+
+	// Errors
+
+	public static void boardTypeError() {
 		System.out.println("Invalid board type \n");
 	}
-	
-	
+
+	public static void squareInsertError(Square square) {
+		System.out.println("Unable to insert square (" + square.x + ", " + square.y + ", " + square.value + ")" + "\n");
+	}
+
+	public static void listenerError() {
+		System.out.println("The value inserted is not valid \n");
+	}
 }
