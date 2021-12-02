@@ -74,7 +74,11 @@ public class Board {
 	}
 
 	public static void cleanSquare(Square square) {
-
+		if (!square.fixedVerify()) {
+			Printer.listenerError();
+		}
+		
+		grid[square.y][square.x] = 0;
 	}
 
 	public static void print() {

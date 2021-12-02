@@ -52,13 +52,13 @@ public class Game {
 		Printer.getPosition();
 		Square square = Listener.getSquare(false);
 
-		if (square.fixedVerify()) {
-
-		}
+		Board.cleanSquare(square);
+		
+		Board.print();
 	}
 
 	public static void verifyGame() {
-
+		
 	}
 
 	public static void takeAHint() {
