@@ -88,10 +88,12 @@ public class Game {
 
 		if (Board.fixedGrid[square.y][square.y] == 1) {
 			Printer.fixedError();
+			return;
 		}
 
 		if (Board.grid[square.y][square.y] != 0) {
 			Printer.hintError();
+			return;
 		}
 
 		int possibilities = 0;
@@ -100,7 +102,6 @@ public class Game {
 		for (int i = 1; i <= Board.GRID_LENGTH; i++) {
 			square.value = i;
 
-			Printer.squareValue(square);
 			if (square.isPossible(false)) {
 				possibilitiesValues[possibilities++] = i;
 			}
