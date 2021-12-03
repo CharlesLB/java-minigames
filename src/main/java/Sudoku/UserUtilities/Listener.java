@@ -12,7 +12,7 @@ public class Listener {
 			int value = scanner.nextInt();
 			scanner.nextLine();
 			return value;
-			
+
 		} catch (Exception err) {
 			return getValue();
 		}
@@ -29,18 +29,18 @@ public class Listener {
 			}
 
 			String[] positionArray = position
-				.replace("(", "")
-				.replace(")", "")
-				.split(",");
+					.replace("(", "")
+					.replace(")", "")
+					.split(",");
 
 			Square square = withValue ? new Square(
-				Integer.parseInt(positionArray[1].trim()) - 1,
-				Integer.parseInt(positionArray[0].trim()) - 1,
-				Integer.parseInt(positionArray[2].trim()))
-				: new Square(
-				Integer.parseInt(positionArray[1].trim()) - 1,
-				Integer.parseInt(positionArray[0].trim()) - 1,
-				0);
+					Integer.parseInt(positionArray[1].trim()) - 1,
+					Integer.parseInt(positionArray[0].trim()) - 1,
+					Integer.parseInt(positionArray[2].trim()))
+					: new Square(
+							Integer.parseInt(positionArray[1].trim()) - 1,
+							Integer.parseInt(positionArray[0].trim()) - 1,
+							0);
 
 			return square;
 		} catch (Exception ex) {

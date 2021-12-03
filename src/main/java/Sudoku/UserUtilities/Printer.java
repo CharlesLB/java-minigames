@@ -35,8 +35,8 @@ public class Printer {
 		}
 		System.out.println("Insert a position square '(x,y)':");
 	}
-	
-	public static void showHint(int[] hint){
+
+	public static void showHint(int[] hint) {
 		System.out.println("Hints: " + Arrays.toString(hint).replaceAll(", 0", ""));
 	}
 
@@ -47,11 +47,10 @@ public class Printer {
 	public static void squareValue(Square square) {
 		System.out.println("(" + (square.x + 1) + ", " + (square.y + 1) + ", " + square.value + ")" + "\n");
 	}
-	
-	public static void win(){
+
+	public static void win() {
 		System.out.println("Congratulations! You win!");
 	}
-	
 
 	// Errors
 

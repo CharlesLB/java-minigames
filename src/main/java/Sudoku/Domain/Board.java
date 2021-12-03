@@ -47,7 +47,7 @@ public class Board {
 	public static void buildManually() {
 		while (true) {
 			Square square = Listener.getSquare(true);
-			
+
 			if (isEndOfBuild(square)) {
 				return;
 			}
