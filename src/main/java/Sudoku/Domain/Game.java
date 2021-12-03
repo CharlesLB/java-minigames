@@ -3,6 +3,11 @@ package Sudoku.Domain;
 import Sudoku.UserUtilities.Listener;
 import Sudoku.UserUtilities.Printer;
 
+import java.awt.*;
+import java.sql.Array;
+import java.util.ArrayList;
+
+
 public class Game {
 	public static void buildBoard() {
 		Printer.getInitialBoardTypeText();
@@ -22,12 +27,19 @@ public class Game {
 			switch (option) {
 				case 0:
 					insertSquare();
+					break;
 				case 1:
 					removeSquare();
+					break;
 				case 2:
-					verifyGame();
+					if (verifyGame()){
+						Printer.win(); 
+						return;
+					}
+					break;
 				case 3:
 					takeAHint();
+					break;
 				case 4:
 					exit();
 					return;
@@ -40,29 +52,66 @@ public class Game {
 	public static void insertSquare() {
 		Square square = Listener.getSquare(true);
 
-		if (square.isPossible(false)) {
-			Board.insertSquare(square, false);
-		} else {
+		if (!square.isPossible(false)) {
 			Printer.squareInsertError(square);
 			insertSquare();
 		}
-	}
 
-	public static void removeSquare() {
-		Printer.getPosition();
-		Square square = Listener.getSquare(false);
-
-		Board.cleanSquare(square);
-		
+		Board.insertSquare(square, false);
 		Board.print();
 	}
 
-	public static void verifyGame() {
-		
+	public static void removeSquare() {
+		Square square = Listener.getSquare(false);
+
+		Board.cleanSquare(square);
+
+		Board.print();
+	}
+
+	public static boolean verifyGame() {
+		Square square = new Square(0, 0, 0);
+
+		for (int i = 0; i < Board.GRID_BOUNDARY; i++) {
+			for (int j = 0; i < Board.GRID_BOUNDARY; i++) {
+				square.x = j;
+				square.y = i;
+				square.value = Board.grid[i][j];
+
+				if (!square.verify()) {
+					Printer.verifyError(square);
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	public static void takeAHint() {
+		Square square = Listener.getSquare(false);
 
+		if (Board.fixedGrid[square.y][square.y] == 1) {
+			Printer.fixedError();
+		}
+
+		if (Board.grid[square.y][square.y] != 0) {
+			Printer.hintError();
+		}
+
+		int possibilities = 0;
+		int[] possibilitiesValues = new int[Board.GRID_BOUNDARY];
+
+		for (int i = 1; i <= Board.GRID_BOUNDARY; i++) {
+			square.value = i;
+
+			Printer.squareValue(square);
+			if (square.isPossible(false)) {
+				possibilitiesValues[possibilities++] = i;
+			}
+		}
+
+		Printer.showHint(possibilitiesValues);
 	}
 
 	public static void exit() {

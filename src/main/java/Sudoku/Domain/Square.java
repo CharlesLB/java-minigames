@@ -1,5 +1,8 @@
 package Sudoku.Domain;
 
+import Sudoku.UserUtilities.Printer;
+
+import java.util.Arrays;
 import java.util.Random;
 
 public class Square {
@@ -14,7 +17,7 @@ public class Square {
 	}
 
 	public boolean isPossible(boolean fixed) {
-		if (!fixed && fixedVerify()) {
+		if (!fixed && !fixedVerify()) {
 			return false;
 		}
 
@@ -23,6 +26,10 @@ public class Square {
 		}
 
 		if (this.x >= Board.GRID_BOUNDARY || this.x < 0) {
+			return false;
+		}
+
+		if (this.value > 9 || this.value < 1) {
 			return false;
 		}
 
@@ -50,6 +57,10 @@ public class Square {
 		return true;
 	}
 
+	public boolean verify() {
+		return this.value != 0;
+	}
+
 	public boolean fixedVerify() {
 		return (Board.fixedGrid[this.y][this.x] == 0);
 	}
@@ -58,15 +69,16 @@ public class Square {
 		Random random = new Random();
 
 		Square randomSquare = new Square(
-				random.nextInt(Board.GRID_BOUNDARY),
-				random.nextInt(Board.GRID_BOUNDARY),
-				random.nextInt(Board.GRID_BOUNDARY) + 1);
+			random.nextInt(Board.GRID_BOUNDARY),
+			random.nextInt(Board.GRID_BOUNDARY),
+			random.nextInt(Board.GRID_BOUNDARY) + 1);
+
 
 		if (Board.grid[randomSquare.y][randomSquare.x] != 0) {
 			return getRandom();
 		}
 
-		if (!randomSquare.isPossible(false)) {
+		if (!randomSquare.isPossible(true)) {
 			return getRandom();
 		}
 

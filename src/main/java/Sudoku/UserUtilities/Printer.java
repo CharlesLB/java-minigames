@@ -2,6 +2,8 @@ package Sudoku.UserUtilities;
 
 import Sudoku.Domain.Square;
 
+import java.util.Arrays;
+
 public class Printer {
 	public static void getInitialBoardTypeText() {
 		System.out.println("Choose initial board type:");
@@ -33,13 +35,23 @@ public class Printer {
 		}
 		System.out.println("Insert a position square '(x,y)':");
 	}
-
-	public static void getPosition() {
+	
+	public static void showHint(int[] hint){
+		System.out.println("Hints: " + Arrays.toString(hint).replaceAll(", 0", ""));
 	}
 
 	public static void exitMessage() {
 		System.out.println("Good Bye!");
 	}
+
+	public static void squareValue(Square square) {
+		System.out.println("(" + (square.x + 1) + ", " + (square.y + 1) + ", " + square.value + ")" + "\n");
+	}
+	
+	public static void win(){
+		System.out.println("Congratulations! You win!");
+	}
+	
 
 	// Errors
 
@@ -48,10 +60,25 @@ public class Printer {
 	}
 
 	public static void squareInsertError(Square square) {
-		System.out.println("Unable to insert square (" + square.x + ", " + square.y + ", " + square.value + ")" + "\n");
+		System.out.println("Unable to insert square: ");
+		squareValue(square);
+		System.out.println("\n");
 	}
 
 	public static void listenerError() {
 		System.out.println("The value inserted is not valid \n");
+	}
+
+	public static void hintError() {
+		System.out.println("This square is already filled\n");
+	}
+
+	public static void fixedError() {
+		System.out.println("This square is fixed \n");
+	}
+
+	public static void verifyError(Square square) {
+		System.out.println("This square is incorrect");
+		squareValue(square);
 	}
 }
