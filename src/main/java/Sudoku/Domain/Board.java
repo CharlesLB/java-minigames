@@ -4,10 +4,10 @@ import Sudoku.UserUtilities.Listener;
 import Sudoku.UserUtilities.Printer;
 
 public class Board {
-	public static final int GRID_BOUNDARY = 9;
+	public static final int GRID_LENGTH = 9;
 
-	public static int[][] grid = new int[GRID_BOUNDARY][GRID_BOUNDARY];
-	public static int[][] fixedGrid = new int[GRID_BOUNDARY][GRID_BOUNDARY];
+	public static int[][] grid = new int[GRID_LENGTH][GRID_LENGTH];
+	public static int[][] fixedGrid = new int[GRID_LENGTH][GRID_LENGTH];
 
 	public Board(int[][] grid, int[][] fixedGrid) {
 		this.grid = grid;
@@ -48,6 +48,8 @@ public class Board {
 		while (true) {
 			Square square = Listener.getSquare(true);
 
+			System.out.println(square.y == -1 && square.x == -1 && square.value == -1);
+
 			if (isEndOfBuild(square)) {
 				return;
 			}
@@ -77,13 +79,13 @@ public class Board {
 		if (!square.fixedVerify()) {
 			Printer.listenerError();
 		}
-		
+
 		grid[square.y][square.x] = 0;
 	}
 
 	public static void print() {
-		for (int i = 0; i < GRID_BOUNDARY; i++) {
-			for (int j = 0; j < GRID_BOUNDARY; j++) {
+		for (int i = 0; i < GRID_LENGTH; i++) {
+			for (int j = 0; j < GRID_LENGTH; j++) {
 				if (j % 3 == 0 && j != 0)
 					System.out.print("   ");
 				System.out.print("[" + grid[i][j] + "]");

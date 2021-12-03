@@ -21,11 +21,11 @@ public class Square {
 			return false;
 		}
 
-		if (this.y >= Board.GRID_BOUNDARY || this.y < 0) {
+		if (this.y >= Board.GRID_LENGTH || this.y < 0) {
 			return false;
 		}
 
-		if (this.x >= Board.GRID_BOUNDARY || this.x < 0) {
+		if (this.x >= Board.GRID_LENGTH || this.x < 0) {
 			return false;
 		}
 
@@ -33,7 +33,7 @@ public class Square {
 			return false;
 		}
 
-		for (int i = 0; i < Board.GRID_BOUNDARY - 1; i++) {
+		for (int i = 0; i < Board.GRID_LENGTH - 1; i++) {
 			if (Board.grid[this.y][i] == this.value) {
 				return false;
 			}
@@ -69,10 +69,9 @@ public class Square {
 		Random random = new Random();
 
 		Square randomSquare = new Square(
-			random.nextInt(Board.GRID_BOUNDARY),
-			random.nextInt(Board.GRID_BOUNDARY),
-			random.nextInt(Board.GRID_BOUNDARY) + 1);
-
+				random.nextInt(Board.GRID_LENGTH),
+				random.nextInt(Board.GRID_LENGTH),
+				random.nextInt(Board.GRID_LENGTH) + 1);
 
 		if (Board.grid[randomSquare.y][randomSquare.x] != 0) {
 			return getRandom();

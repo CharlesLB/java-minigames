@@ -7,7 +7,6 @@ import java.awt.*;
 import java.sql.Array;
 import java.util.ArrayList;
 
-
 public class Game {
 	public static void buildBoard() {
 		Printer.getInitialBoardTypeText();
@@ -32,8 +31,8 @@ public class Game {
 					removeSquare();
 					break;
 				case 2:
-					if (verifyGame()){
-						Printer.win(); 
+					if (verifyGame()) {
+						Printer.win();
 						return;
 					}
 					break;
@@ -72,8 +71,8 @@ public class Game {
 	public static boolean verifyGame() {
 		Square square = new Square(0, 0, 0);
 
-		for (int i = 0; i < Board.GRID_BOUNDARY; i++) {
-			for (int j = 0; i < Board.GRID_BOUNDARY; i++) {
+		for (int i = 0; i < Board.GRID_LENGTH; i++) {
+			for (int j = 0; i < Board.GRID_LENGTH; i++) {
 				square.x = j;
 				square.y = i;
 				square.value = Board.grid[i][j];
@@ -100,9 +99,9 @@ public class Game {
 		}
 
 		int possibilities = 0;
-		int[] possibilitiesValues = new int[Board.GRID_BOUNDARY];
+		int[] possibilitiesValues = new int[Board.GRID_LENGTH];
 
-		for (int i = 1; i <= Board.GRID_BOUNDARY; i++) {
+		for (int i = 1; i <= Board.GRID_LENGTH; i++) {
 			square.value = i;
 
 			Printer.squareValue(square);
