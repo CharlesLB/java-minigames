@@ -1,8 +1,5 @@
 package Sudoku.Domain;
 
-import Sudoku.UserUtilities.Printer;
-
-import java.util.Arrays;
 import java.util.Random;
 
 public class Square {

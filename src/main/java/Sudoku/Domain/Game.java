@@ -3,10 +3,6 @@ package Sudoku.Domain;
 import Sudoku.UserUtilities.Listener;
 import Sudoku.UserUtilities.Printer;
 
-import java.awt.*;
-import java.sql.Array;
-import java.util.ArrayList;
-
 public class Game {
 	public static void buildBoard() {
 		Printer.getInitialBoardTypeText();
