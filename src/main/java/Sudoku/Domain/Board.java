@@ -47,9 +47,7 @@ public class Board {
 	public static void buildManually() {
 		while (true) {
 			Square square = Listener.getSquare(true);
-
-			System.out.println(square.y == -1 && square.x == -1 && square.value == -1);
-
+			
 			if (isEndOfBuild(square)) {
 				return;
 			}
@@ -64,7 +62,7 @@ public class Board {
 	}
 
 	public static boolean isEndOfBuild(Square square) {
-		return square.y == -1 && square.x == -1 && square.value == -1;
+		return square.y == -2 && square.x == -2 && square.value == -1;
 	}
 
 	public static void insertSquare(Square square, boolean fixedSquare) {
