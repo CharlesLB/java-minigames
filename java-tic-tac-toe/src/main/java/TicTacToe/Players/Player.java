@@ -1,4 +1,4 @@
-package Game.Players;
+package TicTacToe.Players;
 
 public class Player {
     private String name;

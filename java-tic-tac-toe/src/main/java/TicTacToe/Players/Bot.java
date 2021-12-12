@@ -1,4 +1,4 @@
-package Game.Players;
+package TicTacToe.Players;
 
 public class Bot extends Player {
     public Bot(char symbol) {

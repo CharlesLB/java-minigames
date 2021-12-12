@@ -1,14 +1,15 @@
-package Game.Domain;
+package TicTacToe.Domain;
 
-import Game.Players.Bot;
-import Game.Players.Player;
+import TicTacToe.Players.Bot;
+import TicTacToe.Players.Player;
+import TicTacToe.UserUtilities.Printer;
 
 public class Match {
     private String mode;
     private Player player1;
     private Player player2;
     private Bot bot;
-    private Board board;
+    private Board board = new Board();
 
     public String getMode() {
         return mode;
@@ -56,5 +57,9 @@ public class Match {
             case 1: return "pve";
             default: return null;
         }
+    }
+
+    public void start(){
+        Printer.startMatch(this);
     }
 }

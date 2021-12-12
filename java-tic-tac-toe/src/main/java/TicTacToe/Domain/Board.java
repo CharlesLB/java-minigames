@@ -1,4 +1,4 @@
-package Game.Domain;
+package TicTacToe.Domain;
 
 public class Board {
     public static final int GRID_LENGTH = 9;
@@ -14,5 +14,7 @@ public class Board {
         {2, 4, 6},
     };
 
-
+    private void printBoard(){
+        
+    }
 }

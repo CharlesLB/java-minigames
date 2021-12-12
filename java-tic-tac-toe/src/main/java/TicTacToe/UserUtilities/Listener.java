@@ -1,4 +1,4 @@
-package Game.UserUtilities;
+package TicTacToe.UserUtilities;
 
 import java.util.Scanner;
 
@@ -30,7 +30,6 @@ public class Listener {
     public static String getString() {
         try {
             String value = scanner.nextLine();
-            scanner.nextLine();
             return value;
 
         } catch (Exception err) {
