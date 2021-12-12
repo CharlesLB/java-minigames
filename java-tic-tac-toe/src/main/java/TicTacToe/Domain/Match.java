@@ -2,6 +2,7 @@ package TicTacToe.Domain;
 
 import TicTacToe.Players.Bot;
 import TicTacToe.Players.Player;
+import TicTacToe.UserUtilities.Listener;
 import TicTacToe.UserUtilities.Printer;
 
 public class Match {
@@ -63,6 +64,90 @@ public class Match {
 	}
 
 	public void start() {
-		Printer.startMatch(this);
+		while (true) {
+			Printer.startMatch(this);
+			this.board.print();
+
+			switch (this.getMode()) {
+				case "pvp":
+					pvp();
+					break;
+				case "pve":
+					pve();
+					break;
+				default:
+					Printer.applicationError("Invalid Game Mode");
+			}
+
+			if (!playAgain()) {
+				return;
+			}
+
+			this.board.clean();
+		}
+	}
+
+	public static boolean playAgain() {
+		Printer.playAgain();
+		int playAgainCode = Listener.getInt();
+
+		if (playAgainCode != 0 && playAgainCode != 1) {
+			Printer.listenerError();
+			return playAgain();
+		}
+
+		return playAgainCode == 0;
+	}
+
+	private void pvp() {
+		for (int turn = 1; true; turn++) {
+			Position player1Play = this.player1.playerPlay(this.board);
+			this.board.insert(player1Play, this.player1.getSymbol());
+
+			if (turn >= 3 && this.board.isPlayerWinner(this.player1.getSymbol())) {
+				Printer.winner(this.player1.getName());
+				return;
+			}
+
+			if (turn == 5) {
+				Printer.draw();
+				return;
+			}
+
+			Printer.playerTurn(this.player2.getName());
+			Position player2Play = this.player2.playerPlay(this.board);
+			this.board.insert(player2Play, this.player2.getSymbol());
+
+			if (turn >= 3 && this.board.isPlayerWinner(this.player2.getSymbol())) {
+				Printer.winner(this.player2.getName());
+				return;
+			}
+		}
+	}
+
+	private void pve() {
+		for (int turn = 1; true; turn++) {
+			Position player1Play = this.player1.playerPlay(this.board);
+			this.board.insert(player1Play, this.player1.getSymbol());
+
+			if (turn >= 3 && this.board.isPlayerWinner(this.player1.getSymbol())) {
+				Printer.winner(this.player1.getName());
+				return;
+			}
+
+			if (turn == 5) {
+				Printer.draw();
+				return;
+			}
+
+			Position botPlay = this.bot.play(this.board);
+			Printer.botTurn(botPlay);
+			this.board.insert(botPlay, this.bot.getSymbol());
+
+			if (turn >= 3 && this.board.isPlayerWinner(this.bot.getSymbol())) {
+				Printer.winner(this.bot.getName());
+				return;
+			}
+		}
 	}
 }

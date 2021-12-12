@@ -1,6 +1,7 @@
 package TicTacToe.UserUtilities;
 
 import TicTacToe.Domain.Match;
+import TicTacToe.Domain.Position;
 
 public class Printer {
 	public static void selectMode() {
@@ -33,6 +34,34 @@ public class Printer {
 			default:
 				applicationError("Invalid Game Mode");
 		}
+	}
+
+	public static void printBoard(char[][] board) {
+		System.out.println(board[0][0] + "|" + board[0][1] + "|" + board[0][2]);
+		System.out.println("-----");
+		System.out.println(board[1][0] + "|" + board[1][1] + "|" + board[1][2]);
+		System.out.println("-----");
+		System.out.println(board[2][0] + "|" + board[2][1] + "|" + board[2][2]);
+	}
+
+	public static void getPosition() {
+		System.out.println("Insert the next position (x,y):");
+	}
+
+	public static void playerTurn(String playerName) {
+		System.out.println("Your turn, " + playerName);
+	}
+
+	public static void botTurn(Position position) {
+		System.out.println("Bot plays: (" + position.getY() + " ," + position.getX() + ");");
+	}
+
+	public static void winner(String playerName) {
+		System.out.println(playerName + " Wins!");
+	}
+
+	public static void draw() {
+		System.out.println("Draw");
 	}
 
 	// errors

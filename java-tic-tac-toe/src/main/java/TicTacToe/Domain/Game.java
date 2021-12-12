@@ -39,18 +39,6 @@ public class Game {
 		match.start();
 	}
 
-	public static boolean playAgain() {
-		Printer.playAgain();
-		int playAgainCode = Listener.getInt();
-
-		if (playAgainCode != 0 && playAgainCode != 1) {
-			Printer.listenerError();
-			return playAgain();
-		}
-
-		return playAgainCode == 1;
-	}
-
 	private static void buildPvp() {
 		createPlayer(1);
 		createPlayer(2);

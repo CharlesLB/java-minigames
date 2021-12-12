@@ -2,6 +2,8 @@ package TicTacToe.UserUtilities;
 
 import java.util.Scanner;
 
+import TicTacToe.Domain.Position;
+
 public class Listener {
 	private static Scanner scanner = new Scanner(System.in);
 
@@ -34,6 +36,33 @@ public class Listener {
 
 		} catch (Exception err) {
 			return getString();
+		}
+	}
+
+	public static Position getPosition() {
+		try {
+			Printer.getPosition();
+
+			String positionString = scanner.nextLine();
+
+			if (positionString == "" || positionString == "\n") {
+				getPosition();
+			}
+
+			String[] positionArray = positionString
+					.replace("(", "")
+					.replace(")", "")
+					.split(",");
+
+			Position position = new Position(
+				(Integer.parseInt(positionArray[0].trim()) - 1),
+				(Integer.parseInt(positionArray[1].trim()) - 1)
+			);
+
+			return position;
+		} catch (Exception ex) {
+			System.out.println("\n");
+			return getPosition();
 		}
 	}
 }
