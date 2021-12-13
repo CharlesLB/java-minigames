@@ -31,11 +31,11 @@ public class Board {
 	}
 
 	public boolean isValidMove(Position position) {
-		if(position.getX() > GRID_LENGTH - 1 && position.getX() < 0){
+		if(position.getX() > (GRID_LENGTH - 1) || position.getX() < 0){
 			return false;
 		}
 
-		if(position.getY() > GRID_LENGTH - 1 && position.getY() < 0){
+		if(position.getY() > GRID_LENGTH - 1 || position.getY() < 0){
 			return false;
 		}
 		
