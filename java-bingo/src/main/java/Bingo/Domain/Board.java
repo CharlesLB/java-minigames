@@ -1,62 +1,72 @@
 package Bingo.Domain;
 
-import Bingo.UserUtilities.Printer;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 public class Board {
-	public static final int GRID_LENGTH = 3;
-	private char[][] board = {
-			{ ' ', ' ', ' ' },
-			{ ' ', ' ', ' ' },
-			{ ' ', ' ', ' ' }
-	};
+	public static final int GRID_LENGTH = 24;
+	private int markedNumbersTotal = 0;
+	private List<Integer> data = createBoard();
 
-	public void setBoard(char[][] board) {
-		this.board = board;
+	public void setMarkedNumbersTotal(int markedNumbersTotal) {
+		this.markedNumbersTotal = markedNumbersTotal;
 	}
 
-	public void insert(Position position, char symbol) {
-		this.board[position.getY()][position.getX()] = symbol;
-		this.print();
+	public List<Integer> getData() {
+		return data;
 	}
 
-	public boolean isPlayerWinner(char symbol) {
-		return ((this.board[0][0] == symbol && this.board[0][1] == symbol && this.board[0][2] == symbol) ||
-				(this.board[1][0] == symbol && this.board[1][1] == symbol && this.board[1][2] == symbol) ||
-				(this.board[2][0] == symbol && this.board[2][1] == symbol && this.board[2][2] == symbol) ||
-				(this.board[0][0] == symbol && this.board[1][0] == symbol && this.board[2][0] == symbol) ||
-				(this.board[0][1] == symbol && this.board[1][1] == symbol && this.board[2][1] == symbol) ||
-				(this.board[0][2] == symbol && this.board[1][2] == symbol && this.board[2][2] == symbol) ||
-				(this.board[0][0] == symbol && this.board[1][1] == symbol && this.board[2][2] == symbol) ||
-				(this.board[0][2] == symbol && this.board[1][1] == symbol && this.board[2][0] == symbol));
-	}
+	private List<Integer> createBoard() {
+		List<Integer> boardData = new ArrayList<>(GRID_LENGTH);
+		int insertNumber;
+		int positionValue;
+		Random random = new Random();
 
-	public boolean isValidMove(Position position) {
-		if(position.getX() > (GRID_LENGTH - 1) || position.getX() < 0){
-			return false;
+		for (int i = 0; i < GRID_LENGTH; i++) {
+			positionValue = getColumnValue(i);
+
+			do {
+				insertNumber = random.nextInt(15) + 1 + positionValue;
+			} while (boardData.contains(insertNumber));
+
+			boardData.add(insertNumber);
 		}
 
-		if(position.getY() > GRID_LENGTH - 1 || position.getY() < 0){
-			return false;
-		}
-		
-		if(this.board[position.getY()][position.getX()] != ' '){
-			return false;
-		}
-		
-		return true;
+		boardData.sort(Comparator.naturalOrder());
+		return boardData;
 	}
 
-	public void print() {
-		Printer.printBoard(this.board);
-	}
-	
-	public void clean(){
-		char[][] cleanBoard = {
-			{ ' ', ' ', ' ' },
-			{ ' ', ' ', ' ' },
-			{ ' ', ' ', ' ' }
-		};
+	private int getColumnValue(int position) {
+		if (position < 5) {
+			return 0;
+		}
 
-		setBoard(cleanBoard);
+		if (position < 10) {
+			return 15;
+		}
+
+		if (position < 14) {
+			return 30;
+		}
+
+		if (position < 19) {
+			return 45;
+		}
+
+		return 60;
+	}
+
+	public void markNumber(int number) {
+		if (!this.getData().contains(number)) {
+			return;
+		}
+
+		this.setMarkedNumbersTotal(this.markedNumbersTotal + 1);
+	}
+
+	public boolean isWinner() {
+		return markedNumbersTotal == 24;
 	}
 }

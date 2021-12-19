@@ -1,38 +1,29 @@
 package Bingo.Players;
 
 import Bingo.Domain.Board;
-import Bingo.Domain.Position;
-import Bingo.UserUtilities.Listener;
-import Bingo.UserUtilities.Printer;
 
 public class Player {
-	private String name;
-	private char symbol;
+	private int id;
+	private Board board;
 
-	public Player(String name, char symbol) {
-		this.name = name;
-		this.symbol = symbol;
+	public Player(int id) {
+		this.id = id;
+		this.board = new Board();
 	}
 
-	public String getName() {
-		return name;
+	public int getId() {
+		return id;
 	}
 
-	public char getSymbol() {
-		return symbol;
+	public Board getBoard() {
+		return board;
 	}
 
-	public Position playerPlay(Board board) {
-		Printer.playerTurn(this.getName());
+	public void markNumber(int number) {
+		this.board.markNumber(number);
+	}
 
-		while (true) {
-			Position position = Listener.getPosition();
-
-			if (board.isValidMove(position)) {
-				return position;
-			}
-
-			Printer.listenerError();
-		}
+	public boolean isWinner() {
+		return this.board.isWinner();
 	}
 }

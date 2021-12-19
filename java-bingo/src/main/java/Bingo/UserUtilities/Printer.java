@@ -1,78 +1,90 @@
 package Bingo.UserUtilities;
 
 import Bingo.Domain.Match;
-import Bingo.Domain.Position;
+import Bingo.Players.Player;
+import java.util.List;
 
 public class Printer {
-	public static void selectMode() {
-		System.out.println("Choose game mode:");
-		System.out.println("  [0]: Player vs Player");
-		System.out.println("  [1]: Player vs Bot");
+	public static void buildMatch() {
+		System.out.println("How many players will play bingo?");
 	}
 
-	public static void getPlayerData(int player, String data) {
-		System.out.println("Insert Player" + player + " " + data);
+	public static void startMatch(Player[] players) {
+		System.out.println("Let's Play Bingo!");
+		printBoards(players);
 	}
 
-	public static void playAgain() {
-		System.out.println("Do you want play again? (S/N)");
-		System.out.println("  [0]: Yes");
-		System.out.println("  [1]: No");
+	public static void printNumber(int number) {
+		System.out.println("the number drawn was: " + number);
 	}
 
-	public static void startMatch(Match match) {
-		System.out.println("Let's Play Tic Tac Toe!");
-		System.out.println(match.getPlayer1().getName() + ": " + match.getPlayer1().getSymbol());
+	public static void waitMessage() {
+		System.out.println("Drawn number (Press enter) ");
+	}
 
-		switch (match.getMode()) {
-			case "pve":
-				System.out.println("Bot:" + match.getBot().getSymbol());
-				return;
-			case "pvp":
-				System.out.println(match.getPlayer2().getName() + ": " + match.getPlayer2().getSymbol());
-				return;
-			default:
-				applicationError("Invalid Game Mode");
+	public static void printBoard(Player player) {
+		List<Integer> board = player.getBoard().getData();
+		String playerName = String.format("%03d", player.getId());
+
+		System.out.println("-------------------------------");
+		System.out.println("| ID " + playerName + "                      |");
+		System.out.println("-------------------------------");
+		System.out.println("|  B  |  I  |  N  |  G  |  O  |");
+		System.out.println("-------------------------------");
+
+		for (int i = 0; i < 5; i++) {
+			System.out.println(
+					"| "
+							+ getValueLine(board.get(i))
+							+ " | "
+							+ getValueLine(board.get(i + 5))
+							+ " | "
+							+ (i == 2
+									? "   "
+									: i > 2
+											? getValueLine(board.get(i + 9))
+											: getValueLine(board.get(i + 10)))
+							+ " | "
+							+ getValueLine(board.get(i + 14))
+							+ " | "
+							+ getValueLine(board.get(i + 19))
+							+ " |");
+
+			System.out.println("-------------------------------");
 		}
 	}
 
-	public static void printBoard(char[][] board) {
-		System.out.println(board[0][0] + "|" + board[0][1] + "|" + board[0][2]);
-		System.out.println("-----");
-		System.out.println(board[1][0] + "|" + board[1][1] + "|" + board[1][2]);
-		System.out.println("-----");
-		System.out.println(board[2][0] + "|" + board[2][1] + "|" + board[2][2]);
+	public static void printBoards(Player[] players) {
+		for (int i = 0; i < players.length; i++) {
+			printBoard(players[i]);
+			System.out.println("\n");
+		}
 	}
 
-	public static void getPosition() {
-		System.out.println("Insert the next position (x,y):");
+	public static void winner(Player[] players) {
+		if (players.length == 1) {
+			System.out.println(players[0].getId() + " Wins!");
+
+			printBoard(players[0]);
+			return;
+		}
+
+		System.out.println("Finish Game.");
+		System.out.println("There are " + players.length + " winners: ");
+
+		printBoards(players);
 	}
 
-	public static void playerTurn(String playerName) {
-		System.out.println("Your turn, " + playerName);
-	}
+	// utils
 
-	public static void botTurn(Position position) {
-		System.out.println("Bot plays: (" + position.getY() + " ," + position.getX() + ");");
-	}
-
-	public static void winner(String playerName) {
-		System.out.println(playerName + " Wins!");
-	}
-
-	public static void draw() {
-		System.out.println("Draw");
+	public static String getValueLine(int number) {
+		return (Match.drawnNumbers.contains(number) ? "*" : " ") + String.format("%02d", number);
 	}
 
 	// errors
 
 	public static void listenerError() {
 		System.out.println("The value inserted is not valid \n");
-	}
-
-	public static void playerDataError(String data) {
-		System.out.println("Invalid data: " + data);
-		System.out.println("Try Again");
 	}
 
 	public static void applicationError(String message) {
