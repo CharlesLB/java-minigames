@@ -55,8 +55,8 @@ public class Printer {
 	}
 
 	public static void printBoards(Player[] players) {
-		for (int i = 0; i < players.length; i++) {
-			printBoard(players[i]);
+		for (Player player : players) {
+			printBoard(player);
 			System.out.println("\n");
 		}
 	}

@@ -69,15 +69,13 @@ public class Match {
 	}
 
 	private List<Player> playersPlay(int numberDrawn) {
-		Player currentPlayer;
 		List<Player> winners = new ArrayList<>();
 
-		for (int i = 0; i < this.getPlayers().size(); i++) {
-			currentPlayer = this.getPlayers().get(i);
-			currentPlayer.markNumber(numberDrawn);
+		for (Player player : this.getPlayers()) {
+			player.markNumber(numberDrawn);
 
-			if (currentPlayer.isWinner()) {
-				winners.add(currentPlayer);
+			if (player.isWinner()) {
+				winners.add(player);
 			}
 		}
 
