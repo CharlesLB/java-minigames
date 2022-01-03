@@ -1,19 +1,36 @@
 package EscapeRoom.Domain;
 
-import EscapeRoom.UserUtilities.Listener;
+import EscapeRoom.Players.Path;
+import EscapeRoom.Players.Player;
 import EscapeRoom.UserUtilities.Printer;
 
 public class Game {
-	private static Match match;
 
 	public static void buildMatch() {
-		Printer.buildMatch();
-		int playersNumber = Listener.getInt();
-
-		match = new Match(playersNumber);
+		Board.createBoard();
 	}
-
-	public static void startMatch() {
-		match.start();
+	
+	public static void playGame(){
+		while (true){
+			Printer.printBoard(Board.getData());
+			
+			int moveStatus = Player.play();
+		
+			switch (moveStatus){
+				case 0:
+					break;
+				case 1:
+					Printer.diedBomb();
+					return;
+				case 2:
+					Printer.diedLeft();
+					return;
+				case 3:
+					Printer.winner();
+				default:
+					Printer.applicationError("Invalid Status");
+					return;
+			}
+		}
 	}
 }

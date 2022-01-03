@@ -1,72 +1,58 @@
 package EscapeRoom.Domain;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import EscapeRoom.UserUtilities.Listener;
+
 import java.util.Random;
 
 public class Board {
-	public static final int GRID_LENGTH = 24;
-	private int markedNumbersTotal = 0;
-	private List<Integer> data = createBoard();
-
-	public void setMarkedNumbersTotal(int markedNumbersTotal) {
-		this.markedNumbersTotal = markedNumbersTotal;
-	}
-
-	public List<Integer> getData() {
+	public static final int GRID_LENGTH = 10;
+	public static char[][] data;
+	public static boolean isFinished = false;
+	
+	public static char[][] getData() {
 		return data;
 	}
 
-	private List<Integer> createBoard() {
-		List<Integer> boardData = new ArrayList<>(GRID_LENGTH);
-		int insertNumber;
-		int positionValue;
+	public static void setData(char[][] data) {
+		Board.data = data;
+	}
+
+	public static boolean isFinished() {
+		return isFinished;
+	}
+
+	public static void setIsFinished(boolean finished) {
+		Board.isFinished = finished;
+	}
+
+	public static void createBoard() {
+		char[][] boardData = createTemplateBoard();
 		Random random = new Random();
+		int x;
+		int y;
 
-		for (int i = 0; i < GRID_LENGTH; i++) {
-			positionValue = getColumnValue(i);
+		int bombsRemaining = Listener.getBombs();
 
-			do {
-				insertNumber = random.nextInt(15) + 1 + positionValue;
-			} while (boardData.contains(insertNumber));
+		while (bombsRemaining > 0) {
+			x = random.nextInt(Board.GRID_LENGTH);
+			y = random.nextInt(Board.GRID_LENGTH);
 
-			boardData.add(insertNumber);
+			if(boardData[y][x] == 0){
+				boardData[y][x] = 'B';
+				bombsRemaining--;
+			}
+			
 		}
 
-		boardData.sort(Comparator.naturalOrder());
-		return boardData;
+		setData(boardData);
 	}
 
-	private int getColumnValue(int position) {
-		if (position < 5) {
-			return 0;
-		}
+	private static char[][] createTemplateBoard() {
+		char[][] boardTemplate = new char[GRID_LENGTH][GRID_LENGTH];
 
-		if (position < 10) {
-			return 15;
-		}
+		boardTemplate[0][0] = 'P';
+		boardTemplate[8][8] = 'S';
 
-		if (position < 14) {
-			return 30;
-		}
-
-		if (position < 19) {
-			return 45;
-		}
-
-		return 60;
-	}
-
-	public void markNumber(int number) {
-		if (!this.getData().contains(number)) {
-			return;
-		}
-
-		this.setMarkedNumbersTotal(this.markedNumbersTotal + 1);
-	}
-
-	public boolean isWinner() {
-		return markedNumbersTotal == 24;
+		return boardTemplate;
 	}
 }

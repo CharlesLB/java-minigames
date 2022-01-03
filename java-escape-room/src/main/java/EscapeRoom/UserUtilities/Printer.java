@@ -1,90 +1,68 @@
 package EscapeRoom.UserUtilities;
 
-import EscapeRoom.Domain.Match;
+import EscapeRoom.Domain.Board;
+import EscapeRoom.Players.Path;
 import EscapeRoom.Players.Player;
-import java.util.List;
 
 public class Printer {
-	public static void buildMatch() {
-		System.out.println("How many players will play EscapeRoom?");
+	public static void startMatch(char[][] board) {
+		System.out.println("Let's Play Escape Room!");
+		printBoard(board);
 	}
 
-	public static void startMatch(Player[] players) {
-		System.out.println("Let's Play EscapeRoom!");
-		printBoards(players);
+	public static void getBombs() {
+		System.out.println("How many bombs will there be on the board? (max: 30) \n");
 	}
 
-	public static void printNumber(int number) {
-		System.out.println("the number drawn was: " + number);
+	public static void getPath() {
+		System.out.println("Insert a position square '(direction , jumps)':");
 	}
 
-	public static void waitMessage() {
-		System.out.println("Drawn number (Press enter) ");
+	public static void printPath(Path path) {
+		System.out.println("[ " + path.getDirection() + "," + path.getJumps() + " ]");
 	}
 
-	public static void printBoard(Player player) {
-		List<Integer> board = player.getBoard().getData();
-		String playerName = String.format("%03d", player.getId());
+	public static void paths(){		
+		System.out.println("Your moves");
+		
+		for (Path path : Player.paths){
+			printPath(path);
+		}
+	}
+	
+	public static void printBoard(char[][] board) {
+		for (int i = 0; i < Board.GRID_LENGTH; i++) {
+			for (int j = 0; j < Board.GRID_LENGTH; j++) {
+				System.out.print("[" + (board[i][j] == 0 ? " " : board[i][j]) + "]");
+			}
 
-		System.out.println("-------------------------------");
-		System.out.println("| ID " + playerName + "                      |");
-		System.out.println("-------------------------------");
-		System.out.println("|  B  |  I  |  N  |  G  |  O  |");
-		System.out.println("-------------------------------");
-
-		for (int i = 0; i < 5; i++) {
-			System.out.println(
-					"| "
-							+ getValueLine(board.get(i))
-							+ " | "
-							+ getValueLine(board.get(i + 5))
-							+ " | "
-							+ (i == 2
-									? "   "
-									: i > 2
-											? getValueLine(board.get(i + 9))
-											: getValueLine(board.get(i + 10)))
-							+ " | "
-							+ getValueLine(board.get(i + 14))
-							+ " | "
-							+ getValueLine(board.get(i + 19))
-							+ " |");
-
-			System.out.println("-------------------------------");
+			System.out.print("\n");
 		}
 	}
 
-	public static void printBoards(Player[] players) {
-		for (Player player : players) {
-			printBoard(player);
-			System.out.println("\n");
-		}
+	public static void diedBomb() {
+		System.out.println("You died in a bomb");
+		paths();
 	}
 
-	public static void winner(Player[] players) {
-		if (players.length == 1) {
-			System.out.println(players[0].getId() + " Wins!");
-
-			printBoard(players[0]);
-			return;
-		}
-
-		System.out.println("Finish Game.");
-		System.out.println("There are " + players.length + " winners: ");
-
-		printBoards(players);
+	public static void diedLeft() {
+		System.out.println("You left the board");
+		paths();
 	}
-
-	// utils
-
-	public static String getValueLine(int number) {
-		return (Match.drawnNumbers.contains(number) ? "*" : " ") + String.format("%02d", number);
+	
+	public static void winner(){
+		System.out.println("You Win");
+		paths();
 	}
 
 	// errors
 
 	public static void listenerError() {
 		System.out.println("The value inserted is not valid \n");
+	}
+
+	public static void directionError() {
+		System.out.println("This direction is not valid \n");
 	}
 
 	public static void applicationError(String message) {
