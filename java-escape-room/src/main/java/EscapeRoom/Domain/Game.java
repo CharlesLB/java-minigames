@@ -1,6 +1,5 @@
 package EscapeRoom.Domain;
 
-import EscapeRoom.Players.Path;
 import EscapeRoom.Players.Player;
 import EscapeRoom.UserUtilities.Printer;
 
@@ -9,14 +8,14 @@ public class Game {
 	public static void buildMatch() {
 		Board.createBoard();
 	}
-	
-	public static void playGame(){
-		while (true){
+
+	public static void playGame() {
+		while (true) {
 			Printer.printBoard(Board.getData());
-			
+
 			int moveStatus = Player.play();
-		
-			switch (moveStatus){
+
+			switch (moveStatus) {
 				case 0:
 					break;
 				case 1:

@@ -29,18 +29,18 @@ public class Player {
 		Player.x = x;
 	}
 
-	public static int play(){
+	public static int play() {
 		Path path = Listener.getPath();
 		paths.add(path);
-		
-		System.out.println(Player.x +" "+ Player.y);
-		
+
+		System.out.println(Player.x + " " + Player.y);
+
 		int wayStatus = path.move();
-		
+
 		return wayStatus;
 	}
-	
-	private static void move(int newY, int newX){
+
+	private static void move(int newY, int newX) {
 		Board.data[getY()][getX()] = 0;
 		Board.data[newY][newX] = 'P';
 	}

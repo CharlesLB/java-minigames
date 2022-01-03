@@ -8,7 +8,7 @@ import java.util.List;
 public class Path {
 	private int jumps;
 	private char direction;
-	public static final List<Character> DIRECTIONS = List.of('e','d','c','b');
+	public static final List<Character> DIRECTIONS = List.of('e', 'd', 'c', 'b');
 
 	public Path(int jumps, char direction) {
 		this.jumps = jumps;
@@ -18,20 +18,20 @@ public class Path {
 	public int getJumps() {
 		return jumps;
 	}
-	
+
 	public char getDirection() {
 		return direction;
 	}
-	
-	public int move(){
-		switch (this.getDirection()){
-			case 'e': 
+
+	public int move() {
+		switch (this.getDirection()) {
+			case 'e':
 				return goLeft();
 			case 'd':
 				return goRight();
-			case 'c': 
+			case 'c':
 				return goUp();
-			case 'b': 
+			case 'b':
 				return goDown();
 			default:
 				Printer.applicationError("Invalid Direction");
@@ -39,39 +39,39 @@ public class Path {
 		}
 	}
 
-	private int goLeft(){
-		for (int i = getJumps(); i > 0; i--){
-			if(Player.getX() - 1 < 0){
+	private int goLeft() {
+		for (int i = getJumps(); i > 0; i--) {
+			if (Player.getX() - 1 < 0) {
 				return 2;
 			}
-			
-			if(Board.data[Player.getY()][Player.getX() - 1] == 'S'){
+
+			if (Board.data[Player.getY()][Player.getX() - 1] == 'S') {
 				Player.setX(Player.getX() - 1);
 				return 3;
 			}
-			
-			if(Board.data[Player.getY()][Player.getX() - 1] == 'B') {
+
+			if (Board.data[Player.getY()][Player.getX() - 1] == 'B') {
 				return 1;
 			}
 
 			Player.setX(Player.getX() - 1);
 		}
-		
+
 		return 0;
 	}
 
-	private int goRight(){
-		for (int i = getJumps(); i > 0; i--){
-			if(Player.getX() + 1 > 9){
+	private int goRight() {
+		for (int i = getJumps(); i > 0; i--) {
+			if (Player.getX() + 1 > 9) {
 				return 2;
 			}
 
-			if(Board.data[Player.getY()][Player.getX() + 1] == 'S'){
+			if (Board.data[Player.getY()][Player.getX() + 1] == 'S') {
 				Player.setX(Player.getX() + 1);
 				return 3;
 			}
 
-			if(Board.data[Player.getY()][Player.getX() + 1] == 'B') {
+			if (Board.data[Player.getY()][Player.getX() + 1] == 'B') {
 				return 1;
 			}
 
@@ -81,18 +81,18 @@ public class Path {
 		return 0;
 	}
 
-	private int goUp(){
-		for (int i = getJumps(); i > 0; i--){
-			if(Player.getY() - 1 < 0){
+	private int goUp() {
+		for (int i = getJumps(); i > 0; i--) {
+			if (Player.getY() - 1 < 0) {
 				return 2;
 			}
 
-			if(Board.data[Player.getY() - 1][Player.getX()] == 'S'){
+			if (Board.data[Player.getY() - 1][Player.getX()] == 'S') {
 				Player.setY(Player.getY() - 1);
 				return 3;
 			}
 
-			if(Board.data[Player.getY() - 1][Player.getX()] == 'B') {
+			if (Board.data[Player.getY() - 1][Player.getX()] == 'B') {
 				return 1;
 			}
 
@@ -102,18 +102,18 @@ public class Path {
 		return 0;
 	}
 
-	private int goDown(){
-		for (int i = getJumps(); i > 0; i--){
-			if(Player.getY() + 1 > 9){
+	private int goDown() {
+		for (int i = getJumps(); i > 0; i--) {
+			if (Player.getY() + 1 > 9) {
 				return 2;
 			}
 
-			if(Board.data[Player.getY() + 1][Player.getX()] == 'S'){
+			if (Board.data[Player.getY() + 1][Player.getX()] == 'S') {
 				Player.setY(Player.getY() + 1);
 				return 3;
 			}
 
-			if(Board.data[Player.getY() + 1][Player.getX()] == 'B') {
+			if (Board.data[Player.getY() + 1][Player.getX()] == 'B') {
 				return 1;
 			}
 
@@ -123,5 +123,3 @@ public class Path {
 		return 0;
 	}
 }
-
-

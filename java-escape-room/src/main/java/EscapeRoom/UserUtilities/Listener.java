@@ -9,7 +9,7 @@ public class Listener {
 
 	public static int getBombs() {
 		int value;
-		
+
 		while (true) {
 			try {
 				Printer.getBombs();
@@ -41,16 +41,15 @@ public class Listener {
 			}
 
 			String[] positionArray = position
-				.replace("(", "")
-				.replace(")", "")
-				.split(",");
+					.replace("(", "")
+					.replace(")", "")
+					.split(",");
 
 			Path path = new Path(
-				Integer.parseInt(positionArray[1].trim()),
-				positionArray[0].charAt(0))
-				;
-			
-			if(!Path.DIRECTIONS.contains(path.getDirection())){
+					Integer.parseInt(positionArray[1].trim()),
+					positionArray[0].charAt(0));
+
+			if (!Path.DIRECTIONS.contains(path.getDirection())) {
 				Printer.directionError();
 				getPath();
 			}

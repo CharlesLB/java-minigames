@@ -22,14 +22,14 @@ public class Printer {
 		System.out.println("[ " + path.getDirection() + "," + path.getJumps() + " ]");
 	}
 
-	public static void paths(){		
+	public static void paths() {
 		System.out.println("Your moves");
-		
-		for (Path path : Player.paths){
+
+		for (Path path : Player.paths) {
 			printPath(path);
 		}
 	}
-	
+
 	public static void printBoard(char[][] board) {
 		for (int i = 0; i < Board.GRID_LENGTH; i++) {
 			for (int j = 0; j < Board.GRID_LENGTH; j++) {
@@ -49,8 +49,8 @@ public class Printer {
 		System.out.println("You left the board");
 		paths();
 	}
-	
-	public static void winner(){
+
+	public static void winner() {
 		System.out.println("You Win");
 		paths();
 	}

@@ -8,7 +8,7 @@ public class Board {
 	public static final int GRID_LENGTH = 10;
 	public static char[][] data;
 	public static boolean isFinished = false;
-	
+
 	public static char[][] getData() {
 		return data;
 	}
@@ -37,11 +37,11 @@ public class Board {
 			x = random.nextInt(Board.GRID_LENGTH);
 			y = random.nextInt(Board.GRID_LENGTH);
 
-			if(boardData[y][x] == 0){
+			if (boardData[y][x] == 0) {
 				boardData[y][x] = 'B';
 				bombsRemaining--;
 			}
-			
+
 		}
 
 		setData(boardData);
