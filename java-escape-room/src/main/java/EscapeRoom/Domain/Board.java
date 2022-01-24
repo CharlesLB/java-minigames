@@ -7,7 +7,6 @@ import java.util.Random;
 public class Board {
 	public static final int GRID_LENGTH = 10;
 	public static char[][] data;
-	public static boolean isFinished = false;
 
 	public static char[][] getData() {
 		return data;
@@ -15,14 +14,6 @@ public class Board {
 
 	public static void setData(char[][] data) {
 		Board.data = data;
-	}
-
-	public static boolean isFinished() {
-		return isFinished;
-	}
-
-	public static void setIsFinished(boolean finished) {
-		Board.isFinished = finished;
 	}
 
 	public static void createBoard() {

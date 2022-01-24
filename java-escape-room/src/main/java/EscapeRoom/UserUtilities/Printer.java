@@ -5,11 +5,6 @@ import EscapeRoom.Players.Path;
 import EscapeRoom.Players.Player;
 
 public class Printer {
-	public static void startMatch(char[][] board) {
-		System.out.println("Let's Play Escape Room!");
-		printBoard(board);
-	}
-
 	public static void getBombs() {
 		System.out.println("How many bombs will there be on the board? (max: 30) \n");
 	}
