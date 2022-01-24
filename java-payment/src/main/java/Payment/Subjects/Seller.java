@@ -15,10 +15,10 @@ public class Seller extends Employee {
 
 	public double getCommission() {
 		double total = 0;
-		
-			for (Sell sell: sells){
-				total += sell.getTotal() * COMMISSION;
-			}
+
+		for (Sell sell : sells) {
+			total += sell.getTotal() * COMMISSION;
+		}
 
 		return total;
 	}

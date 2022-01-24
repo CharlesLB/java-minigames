@@ -3,6 +3,7 @@ package Payment.Subjects;
 public abstract class Employee {
 	private String name;
 	private double dailySalary;
+
 	public abstract double getCommission();
 
 	public Employee(String name, double dailySalary) {

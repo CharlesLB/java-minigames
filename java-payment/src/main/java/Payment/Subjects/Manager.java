@@ -15,13 +15,13 @@ public class Manager extends Employee {
 
 	public double getCommission() {
 		double total = 0;
-		
-		for(Seller seller: sellers){
-			for (Sell sell: seller.sells){
+
+		for (Seller seller : sellers) {
+			for (Sell sell : seller.sells) {
 				total += sell.getTotal() * COMMISSION;
 			}
 		}
-		
+
 		return total;
 	}
 }
