@@ -2,11 +2,11 @@ package Stock.Models;
 
 public class Product {
     private String name;
-    private float value;
+    private double value;
     private int quantity;
     private String description;
 
-    public Product(String name, float value, int quantity, String description) {
+    public Product(String name, double value, int quantity, String description) {
         this.name = name;
         this.value = value;
         this.quantity = quantity;
@@ -21,11 +21,11 @@ public class Product {
         this.name = name;
     }
 
-    public float getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
