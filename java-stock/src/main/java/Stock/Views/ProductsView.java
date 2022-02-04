@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsView extends JFrame{
+public class ProductsView extends JFrame {
     private JPanel container;
     private JTable table;
     private JButton removeButton;
@@ -33,27 +33,27 @@ public class ProductsView extends JFrame{
         render();
     }
 
-    private void render(){
+    private void render() {
         setContentPane(container);
         setTitle("Stock Control | Products");
-        setSize(Screen.width,Screen.height);
+        setSize(Screen.width, Screen.height);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
-    private void createProductsTable(){
-        String [] columns = {"Name", "Value", "Quantity", "Description"};
+    private void createProductsTable() {
+        String[] columns = { "Name", "Value", "Quantity", "Description" };
 
         table.setModel(new DefaultTableModel(null, columns));
     }
 
-    private void setupListeners(){
+    private void setupListeners() {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                try{
+                try {
                     addProduct();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -74,33 +74,33 @@ public class ProductsView extends JFrame{
             int quantity = Integer.parseInt(quantityInput.getText());
             String description = descriptionTextArea.getText();
 
-            if(name.isEmpty() || value.isNaN() || quantity <= 0 || description.isEmpty()){
+            if (name.isEmpty() || value.isNaN() || quantity <= 0 || description.isEmpty()) {
                 printError("Invalid Value!");
             }
 
-            Product product = new Product(name,value,quantity,description);
+            Product product = new Product(name, value, quantity, description);
             products.add(product);
 
-            String[] newRow = {name, Double.toString(value), Integer.toString(quantity), description };
+            String[] newRow = { name, Double.toString(value), Integer.toString(quantity), description };
 
-            DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
+            DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
             tableModel.addRow(newRow);
 
             resetForm();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             printError("Invalid Value!");
         }
     }
 
-    private void removeProduct(){
-        DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
+    private void removeProduct() {
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 
-        if(table.getSelectedRowCount() == 0){
+        if (table.getSelectedRowCount() == 0) {
             printError("No rows selected");
             return;
         }
 
-        if(table.getRowCount() == 0){
+        if (table.getRowCount() == 0) {
             printError("There is no data in the table");
             return;
         }
@@ -109,14 +109,14 @@ public class ProductsView extends JFrame{
         tableModel.removeRow(table.getSelectedRow());
     }
 
-    private void resetForm(){
+    private void resetForm() {
         nameInput.setText("");
         valueInput.setText("");
         quantityInput.setText("");
         descriptionTextArea.setText("");
     }
 
-    private void printError(String message){
-        JOptionPane.showMessageDialog(null, message, "Error",  JOptionPane.INFORMATION_MESSAGE);
+    private void printError(String message) {
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.INFORMATION_MESSAGE);
     }
 }
