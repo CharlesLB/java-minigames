@@ -105,8 +105,16 @@ public class ProductsView extends JFrame {
             return;
         }
 
+        printList();
+
         products.remove(table.getSelectedRow());
         tableModel.removeRow(table.getSelectedRow());
+    }
+
+    private void printList() {
+        for (Product product : products) {
+            System.out.println(product.getName());
+        }
     }
 
     private void resetForm() {
